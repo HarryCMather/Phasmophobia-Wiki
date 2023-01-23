@@ -1,0 +1,90 @@
+﻿@page
+@using Phasmophobia_Wiki.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Evidence";
+}
+
+<div class="text-center">
+    <h2 class="text-white" style="font-size: 2.5rem">Evidence:</h2>
+    <form method="post" asp-page-handler="">
+        <table class="evidenceSelectionText">
+            @for (int count = 0; count < Model.ActivityEnumNames.Count; count++)
+            {
+                <tr>
+                    <td class="evidenceSelectionCheckbox"><input name="CheckedBoxes" type="checkbox" value="@count" checked="@Model.CheckedBoxes.Contains(count)"/></td>
+                    <td class="evidenceSelectionText">@Model.ActivityEnumNames[count]</td>
+                </tr>
+            }
+        </table>
+        @{
+            string buttonText = !Model.GhostsForActivities.Any() ? "Retrieve Possible Ghosts" : "Update Possible Ghosts";
+            <button class="btn-light">@buttonText</button>
+        }
+    </form>
+    <form id="AllGhosts" method="post">
+        <button type="submit" form="AllGhosts" asp-page-handler="AllGhosts" class="btn-light">List All Ghosts</button>
+    </form>
+    <br/>
+    
+    @{
+        if (Model.GhostsForActivities.Any())
+        {
+            <h2 class="text-white" style="font-size: 2.5rem">Possible Ghosts:</h2>
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Summary</th>
+                    <th>Advantages</th>
+                    <th>Disadvantages</th>
+                    <th>Activities</th>
+                    <th>Additional Details</th>
+                </thead>
+                @foreach (Ghost ghost in Model.GhostsForActivities)
+                {
+                    <tr>
+                        <td><strong>@ghost.Name</strong></td>
+                        <td>@ghost.Summary</td>
+                        <td>
+                            <ul>
+                                @foreach (string advantage in ghost.Advantages)
+                                {
+                                    <li>@advantage</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (string disadvantage in ghost.Disadvantages)
+                                {
+                                    <li>@disadvantage</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (ActivityEnum activity in ghost.RequiredActivity)
+                                {
+                                    string colour = Model.CheckedBoxes.Contains((int)activity) ? "#00ff00" : "#ff0000";
+                                    <li style="color: @colour">@Activity.GetActivityName(activity)</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (string additionalDetail in ghost.AdditionalDetails)
+                                {
+                                    <li>@additionalDetail</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else if (Model.CheckedBoxes.Any())
+        {
+            <h3 class="display-6" style="font-size: 1rem;">No ghosts matched the requested criteria.</h3>
+        }
+    }
+</div>
