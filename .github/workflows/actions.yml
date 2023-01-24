@@ -26,7 +26,8 @@ jobs:
     # Restore dotnet package dependencies
     # Publish project
     - name: Publish project
-      run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" -p:PublishSingleFile=true --configuration Release --output ./Output
+      run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" --configuration Release --output ./Output
+      # run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" -p:PublishSingleFile=true --configuration Release --output ./Output
 
     # Publish build artifacts
     - name: Publish build artifacts
