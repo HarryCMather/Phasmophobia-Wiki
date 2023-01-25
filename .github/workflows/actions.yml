@@ -1,11 +1,8 @@
 name: Publish Phasmophoobia Wiki
 
-on: [push]
-# on:
-  # push:
-  #   branches: [ "master" ]
-  # pull_request:
-  #   branches: [ "master" ]
+on:
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -17,21 +14,54 @@ jobs:
       with:
         fetch-depth: 0
 
-    # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 6.0.x
 
-    # Restore dotnet package dependencies
-    # Publish project
     - name: Publish project
       run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" --configuration Release --output ./Output
-      # run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" -p:PublishSingleFile=true --configuration Release --output ./Output
 
-    # Publish build artifacts
     - name: Publish build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: PhasmophobiaWiki
         path: ./Output
+        
+    - name: Configure connection to server
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/staging.key
+        chmod 600 ~/.ssh/staging.key
+        cat >>~/.ssh/config <<END
+        Host staging
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/staging.key
+          StrictHostKeyChecking no
+        END
+      env:
+        SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+        SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+        SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+  
+    - name: Ensure upload completed
+      run: sleep 5
+  
+    - name: Stop Wiki
+      run: ssh staging 'sudo systemctl stop phasmophobiawiki'
+    
+    - name: Remove existing files
+      run: ssh staging 'rm -r /home/ubuntu/PhasmophobiaWiki/*'
+      
+    - name: Download new files
+      run: ssh staging 'dotnet /home/ubuntu/DownloadGithubArtifact/DownloadGithubArtifact.dll Phasmophobia-Wiki /home/ubuntu/PhasmophobiaWiki'
+    
+    - name: Change directory
+      run: ssh staging 'cd /home/ubuntu/PhasmophobiaWiki'
+      
+    - name: Extract files
+      run: ssh staging '7z x ./PhasmophobiaWiki.zip; rm ./PhasmophobiaWiki.zip'
+      
+    - name: Start Wiki
+      run: ssh staging 'sudo systemctl start phasmophobiawiki'
