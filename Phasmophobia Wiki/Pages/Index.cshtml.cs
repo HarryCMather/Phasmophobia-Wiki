@@ -28,6 +28,7 @@ public class IndexModel : PageModel
     public void OnPost()
     {
         _checkedActivities = CheckedBoxes.Select(value => (ActivityEnum)value).ToList();
+        if (!_checkedActivities.Any()) return;
         GhostsForActivities = Activity.GetGhostsForActivities(_ghosts, _checkedActivities);
     }
 
