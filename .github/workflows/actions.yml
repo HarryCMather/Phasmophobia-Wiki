@@ -55,12 +55,9 @@ jobs:
       
     - name: Download new files
       run: ssh staging 'dotnet /home/ubuntu/DownloadGithubArtifact/DownloadGithubArtifact.dll Phasmophobia-Wiki /home/ubuntu/PhasmophobiaWiki'
-    
-    - name: Change directory
-      run: ssh staging 'cd /home/ubuntu/PhasmophobiaWiki'
       
     - name: Extract files
-      run: ssh staging '7z x ./PhasmophobiaWiki.zip; rm ./PhasmophobiaWiki.zip'
+      run: ssh staging '7z x /home/ubuntu/PhasmophobiaWiki/PhasmophobiaWiki.zip; rm /home/ubuntu/PhasmophobiaWiki/PhasmophobiaWiki.zip'
       
     - name: Start Wiki
       run: ssh staging 'sudo systemctl start phasmophobiawiki'
