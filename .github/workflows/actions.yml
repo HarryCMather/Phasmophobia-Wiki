@@ -51,6 +51,7 @@ jobs:
       run: ssh staging 'sudo systemctl stop phasmophobiawiki'
     
     - name: Remove existing files
+      continue-on-error: true # This will otherwise fail if there are no files in the folder
       run: ssh staging 'rm -r /home/ubuntu/PhasmophobiaWiki/*'
       
     - name: Download new files
