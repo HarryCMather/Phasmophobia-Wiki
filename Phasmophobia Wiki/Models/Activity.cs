@@ -21,7 +21,7 @@ public static class Activity
             ActivityEnum.GhostOrbs => GhostOrbs,
             ActivityEnum.GhostWriting => GhostWriting,
             ActivityEnum.SpiritBox => SpiritBox,
-            _ => throw new ArgumentOutOfRangeException(nameof(activity), activity, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(activity), activity, "ERROR: An invalid activity was specified.")
         };
     }
 

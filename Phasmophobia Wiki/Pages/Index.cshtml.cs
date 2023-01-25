@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Primitives;
 using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Services;
 
@@ -10,7 +9,7 @@ public class IndexModel : PageModel
 {
     private readonly List<Ghost> _ghosts;
 
-    private List<ActivityEnum> CheckedActivities = new();
+    private List<ActivityEnum> _checkedActivities = new();
     
     [BindProperty]
     public List<int> CheckedBoxes { get; set; } = new();
@@ -28,8 +27,8 @@ public class IndexModel : PageModel
 
     public void OnPost()
     {
-        CheckedActivities = CheckedBoxes.Select(value => (ActivityEnum)value).ToList();
-        GhostsForActivities = Activity.GetGhostsForActivities(_ghosts, CheckedActivities);
+        _checkedActivities = CheckedBoxes.Select(value => (ActivityEnum)value).ToList();
+        GhostsForActivities = Activity.GetGhostsForActivities(_ghosts, _checkedActivities);
     }
 
     public void OnPostAllGhosts()

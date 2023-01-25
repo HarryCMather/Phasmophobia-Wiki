@@ -2,10 +2,10 @@
 
 public class Ghost
 {
-    public string Name { get; set; } = string.Empty;
-    public string Summary { get; set; } = string.Empty;
-    public List<string> Advantages { get; set; } = new();
-    public List<string> Disadvantages { get; set; } = new();
-    public List<string> AdditionalDetails { get; set; } = new();
+    public string Name { get; init; } = string.Empty;
+    public string Summary { get; init; } = string.Empty;
+    public List<string> Advantages { get; init; } = new();
+    public List<string> Disadvantages { get; init; } = new();
+    public List<string> AdditionalDetails { get; init; } = new();
     public List<ActivityEnum> RequiredActivity { get; set; } = new();
 }
