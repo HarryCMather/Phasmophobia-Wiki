@@ -1,16 +1,15 @@
 [
   {
     "Name": "Spirit",
-    "Summary": "A very common ghost.  They are powerful, but passive, only attacking when needed.  They defend their place of death to the utmost degree, killing anyone that is caught overstaying their welcome.",
+    "Summary": "A common ghost.  They are powerful, but passive, only attacking when needed.  They defend their place of death to the utmost degree, killing anyone that is caught overstaying their welcome.",
     "Advantages": [
-      "FILL IN LATER"
     ],
     "Disadvantages": [
-      "Can be temporarily stopped by burning Smudge Sticks near them.",
-      "FILL IN LATER"
+      "Can be temporarily stopped by burning Smudge Sticks near them."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Burning a smudge stick near them will render them inactive for 1 minute 30 seconds after getting smudged, twice as long as most other ghost types.",
+      "Despite the game claiming it is a common ghost, there is no evidence to suggest it appears more frequently than other ghost types."
     ],
     "RequiredActivity": [
       1,
@@ -22,15 +21,14 @@
     "Name": "Wraith",
     "Summary": "One of the most dangerous ghosts you will find.  It is the only known ghosts that has the ability of flight and has sometimes been known to travel through walls.",
     "Advantages": [
-      "Rarely touches the ground, meaning it can\u0027t be tracked by footsteps.",
-      "FILL IN LATER"
+      "Rarely touches the ground, meaning it can\u0027t be tracked by footsteps."
     ],
     "Disadvantages": [
-      "Afraid of salt and will actively avoid it.",
-      "FILL IN LATER"
+      "Afraid of salt and will actively avoid it."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "When stepping in salt, it will never provide footprints, which can be checked by taking a picture, or using a UV torch.",
+      "Wraiths can instantly teleport to you from anywhere on the map, which can give away the ghost type after activity from places other than the ghost room."
     ],
     "RequiredActivity": [
 	  0,
@@ -42,15 +40,14 @@
     "Name": "Phantom",
     "Summary": "A ghost known to possess the living, inducing fear into those around it.  They are most commonly summoned from Ouija boards.",
     "Advantages": [
-      "Looking at a Phantom will drop your sanity considerably faster.",
-      "FILL IN LATER"
+      "Looking at a Phantom will drop your sanity considerably faster."
     ],
     "Disadvantages": [
-      "Taking a picture of the Phantom will make it temporarily disappear.",
-      "FILL IN LATER"
+      "Taking a picture of the Phantom will make it temporarily disappear."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "If when taking a picture of the ghost is free from glitching and the ghost disappears it is a Phantom.",
+      "Most ghost models flicker when hunting, the Phantom will show in its physical form for 1 second after 5 seconds of invisibility."
     ],
     "RequiredActivity": [
       0,
@@ -62,15 +59,14 @@
     "Name": "Poltergeist",
     "Summary": "A famous ghost.  Known to manipulate objects around it to spread fear into its victims.",
     "Advantages": [
-      "Can throw multiple objects at once, and with great force.",
-      "FILL IN LATER"
+      "Can throw multiple objects at once, and with great force."
     ],
     "Disadvantages": [
-      "With nothing to throw, it becomes powerless.",
-      "FILL IN LATER"
+      "With nothing to throw, it becomes powerless."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Can throw objects at faster speeds, compared to other ghosts.",
+      "Every time it throws an object, your sanity drops by a percentage."
     ],
     "RequiredActivity": [
       2,
@@ -141,17 +137,15 @@
   },
   {
     "Name": "Revenant",
-    "Summary": "A violent ghost that attacks indiscriminantely.  Their speed can be deceiving, as they are slow while dormant.  However, as soon as they hunt they can move incredibly fast.",
+    "Summary": "A violent ghost that attacks indiscriminately.  Their speed can be deceiving, as they are slow while dormant.  However, as soon as they hunt they can move incredibly fast.",
     "Advantages": [
-      "Travel at significantly faster speeds when hunting their prey.",
-      "FILL IN LATER"
+      "Travel at significantly faster speeds when hunting their prey."
     ],
     "Disadvantages": [
-      "Hiding from the Revenant causes it to move very slowly.",
-      "FILL IN LATER"
+      "Hiding from the Revenant causes it to move very slowly."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Hunts slowly if it isn't giving chase, but it is impossible to outrun if it spots you."
     ],
     "RequiredActivity": [
       3,
@@ -163,15 +157,16 @@
     "Name": "Shade",
     "Summary": "Known to be very shy.  There is evidence to suggest that a Shade will stop all paranormal activity if there are people nearby.",
     "Advantages": [
-      "Harder to find.",
-      "FILL IN LATER"
+      "Harder to find."
     ],
     "Disadvantages": [
-      "Won\u0027t enter a hunt if there are people nearby.",
-      "FILL IN LATER"
+      "Won\u0027t enter a hunt if there are people nearby."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "This ghost is very reluctant to hand over any evidence.",
+      "Playing on professional makes this ghost more active, and more likely to hand over evidence.",
+      "Activity levels will rise when nobody is nearby.",
+      "The ghost will only enter hunts when the average sanity is below 35%."
     ],
     "RequiredActivity": [
       1,
@@ -203,15 +198,14 @@
     "Name": "Yurei",
     "Summary": "Returend to the physical world, usually for the purpose of revenge or hatred.",
     "Advantages": [
-      "Known to have a stronger effect on people\u0027s sanity.",
-      "FILL IN LATER"
+      "Known to have a stronger effect on people\u0027s sanity."
     ],
     "Disadvantages": [
-      "Smudging the Yurei\u0027s place of death will trap it temporarily, reducing how much it wanders.",
-      "FILL IN LATER"
+      "Smudging the Yurei\u0027s place of death will trap it temporarily, reducing how much it wanders."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Can slam multiple doors at once.",
+      "When taking pictures of the slammed doors, it shows that this activity does not count as a ghost interaction, nor count as photo evidence.  This will however drop your sanity by 15%."
     ],
     "RequiredActivity": [
       0,
@@ -223,15 +217,15 @@
     "Name": "Oni",
     "Summary": "Loves to scare its victims as much as possible before attacking.  They are often seen in their physical form, guarding their place of death.",
     "Advantages": [
-      "Much more active when people are nearby and will drain their sanity faster when manifesting.",
-      "FILL IN LATER"
+      "Much more active when people are nearby and will drain their sanity faster when manifesting."
     ],
     "Disadvantages": [
-      "Disappears less often while hunting their prey.",
-      "FILL IN LATER"
+      "Disappears less often while hunting their prey."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Very volatile, often causing activity to spike when you enter the map.",
+      "Ghost activity should drop to near non-existent when the team is outside.",
+      "Will appear for longer than they blink into invisibility."
     ],
     "RequiredActivity": [
       0,
@@ -243,15 +237,13 @@
     "Name": "Yokai",
     "Summary": "A common ghost that is attracted to human voices.  They can usually be found hunting family homes.",
     "Advantages": [
-      "Talking near a Yokai will anger it, increasing its chance of attack.",
-      "FILL IN LATER"
+      "Talking near a Yokai will anger it, increasing its chance of attack."
     ],
     "Disadvantages": [
-      "When hunting, a Yokai can only hear voices close to it.",
-      "FILL IN LATER"
+      "When hunting, a Yokai can only hear voices close to it."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "As it's very reactive to human voices, it can initiate hunts from as early as 90% sanity."
     ],
     "RequiredActivity": [
       0,
@@ -318,15 +310,13 @@
     "Name": "Onryo",
     "Summary": "Referred to as \u0022The Wrathful Spirit\u0022.  It steals souls from dying victims\u0027 bodies to seek revenge.  This ghost has been known to fear any form of fire, and will do anything to be far from it.",
     "Advantages": [
-      "Extinguishing a flame can cause an Onryo to attack.",
-      "FILL IN LATER"
+      "Extinguishing a flame can cause an Onryo to attack."
     ],
     "Disadvantages": [
-      "When threatened, this ghost will be less likely to hunt.",
-      "FILL IN LATER"
+      "When threatened, this ghost will be less likely to hunt."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Cannot hunt when a lit candle is placed nearby."
     ],
     "RequiredActivity": [
       3,
@@ -338,15 +328,15 @@
     "Name": "The Twins",
     "Summary": "These ghosts have been reported to mimic each other\u0027s actions.  They alternate their attacks to confuse their prey.",
     "Advantages": [
-      "Either Twin can be angered and initiate an attack on their prey.",
-      "FILL IN LATER"
+      "Either Twin can be angered and initiate an attack on their prey."
     ],
     "Disadvantages": [
-      "They often interact with the environment at the same time.",
-      "FILL IN LATER"
+      "They often interact with the environment at the same time."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "One of the twins is usually stationed in the ghost room giving evidence, whereas the other roams elsewhere to throw off ghost hunters.",
+      "They tend to perform back-to-back interactions.",
+      "Check for non-straight lines on the activity graph, as this is an indication The Twins are interacting with the environment simultaneously."
     ],
     "RequiredActivity": [
       1,
@@ -358,15 +348,12 @@
     "Name": "Raiju",
     "Summary": "A demon that thrives on electrical current.  While generally calm, they can become agitated when overwhelmed with power.",
     "Advantages": [
-      "Known to siphon power from nearby electrical devices, making it move faster.",
-      "FILL IN LATER"
+      "Known to siphon power from nearby electrical devices, making it move faster."
     ],
     "Disadvantages": [
-      "Constantly disrupts electronic equipment when attacking, making it easier to track.",
-      "FILL IN LATER"
+      "Constantly disrupts electronic equipment when attacking, making it easier to track."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
     ],
     "RequiredActivity": [
       0,
@@ -378,15 +365,14 @@
     "Name": "Obake",
     "Summary": "A terrifying shape-shifter, capable of taking on many forms.  They have been seen taking on humanoid shapes to attract their prey.",
     "Advantages": [
-      "When interacting with the environment, an Obake will rarely leave a trace.",
-      "FILL IN LATER"
+      "When interacting with the environment, an Obake will rarely leave a trace."
     ],
     "Disadvantages": [
-      "Sometimes this ghost will shapeshift, leaving behind unique evidence.",
-      "FILL IN LATER"
+      "Sometimes this ghost will shapeshift, leaving behind unique evidence."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "There is a chance an Obake may leave a six-fingered handprint.",
+      "Obake handprints disappear within 40 seconds of appearance, compared to the usual 70-80 seconds."
     ],
     "RequiredActivity": [
       1,
@@ -459,15 +445,19 @@
     "Name": "Thaye",
     "Summary": "Known to rapidly age over time, even in the afterlife.  From what we\u0027ve learned, they seem to deterioriate faster while whithin the presence of the living.",
     "Advantages": [
-      "Upon entering the location, Thaye will become active, defensive and agile.",
-      "FILL IN LATER"
+      "Upon entering the location, Thaye will become active, defensive and agile."
     ],
     "Disadvantages": [
-      "Will weaken over time, making them weaker, slower and less aggressive.",
-      "FILL IN LATER"
+      "Will weaken over time, making them weaker, slower and less aggressive."
     ],
     "AdditionalDetails": [
-      "FILL IN LATER"
+      "Starts off extremely powerful and aggressive, but becomes significantly slower and less active over time.",
+      "If suspected, it may be necessary to attempt to initiate a hunt early.",
+      "Tends to hunt between 50 and 75% average sanity.",
+      "Attempt to find all evidence before it becomes inactive.",
+      "Activity is more dependent on the investigation time, rather than average sanity.",
+      "Listen out for footsteps becoming slower with every hunt.",
+      "Can be distinguished from a Jinn and Raiju by checking whether the breaker is on, as those two ghosts are empowered by electricity, which should indicate whether a dormant Thaye is present."
     ],
     "RequiredActivity": [
 	  0,
