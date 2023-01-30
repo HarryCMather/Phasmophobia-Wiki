@@ -20,6 +20,4 @@ This will pull the source files from GitHub, build them and launch the applicati
 # Planned development items:
 -Using IMemoryCache at the service layer.
 
--Creating a Docker image, allowing the web application to run within containers.
-
 -Addition of Unit tests.
