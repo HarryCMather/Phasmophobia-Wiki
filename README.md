@@ -9,5 +9,7 @@ The web application listens on port 8000 over HTTP.  The application can be star
 
 # Planned development items:
 -Using IMemoryCache at the service layer.
+
 -Creating a Docker image, allowing the web application to run within containers.
+
 -Addition of Unit tests.
