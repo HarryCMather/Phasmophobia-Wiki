@@ -1,10 +1,13 @@
 ﻿using System.Text.Json;
-using Microsoft.AspNetCore.Server.HttpSys;
 using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Repositories;
 
 namespace Phasmophobia_Wiki.DataPopulator;
 
+/// <summary>
+/// This class has been created for the sole purpose of assisting with the editing of the Ghosts.json file.
+/// This will not be used by default when the Web App starts up, and will need to uncommented to be injected within 'Program.cs'
+/// </summary>
 public class ActivityPopulator
 {
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
