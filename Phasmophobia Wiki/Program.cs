@@ -1,21 +1,35 @@
+using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Repositories;
 using Phasmophobia_Wiki.Services;
 
-// DataPopulator.PopulateData();
-// ActivityPopulator.PopulateData();
+// Leaving this commented out, so it can be easily added back in the future:
+// IOptions<Settings> settings = Options.Create(new Settings
+// {
+//     GhostsFilePath = "./ghosts.json"
+// });
+// DataPopulator dataPopulator = new(settings);
+// ActivityPopulator activityPopulator = new(settings);
+// dataPopulator.PopulateData();
+// activityPopulator.PopulateData();
 // return;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Run the application on port 8000, regardless of what port is set in launchsettings.json
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8000);
 });
 
-// Add services to the container.
+// Inject 'Settings'
+builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
+
+// Add services to the DI container.
 builder.Services.AddSingleton<IGhostRepository, GhostRepository>();
 
 builder.Services.AddSingleton<IGhostService, GhostService>();
+
+builder.Services.AddScoped<IActivityService, ActivityService>();
 
 builder.Services.AddRazorPages();
 
@@ -30,6 +44,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

@@ -1,6 +1,8 @@
 ﻿@page
 @using Phasmophobia_Wiki.Models
+@using Phasmophobia_Wiki.Services
 @model IndexModel
+@inject IActivityService ActivityService
 @{
     ViewData["Title"] = "Evidence";
 }
@@ -66,8 +68,9 @@
                             <ul>
                                 @foreach (ActivityEnum activity in ghost.RequiredActivity)
                                 {
+                                    // If the user has found the evidence, set the colour to green, if evidence is still to be found set it to red:
                                     string colour = Model.CheckedBoxes.Contains((int)activity) ? "#00ff00" : "#ff0000";
-                                    <li style="color: @colour">@Activity.GetActivityName(activity)</li>
+                                    <li style="color: @colour">@ActivityService.GetActivityName(activity)</li>
                                 }
                             </ul>
                         </td>

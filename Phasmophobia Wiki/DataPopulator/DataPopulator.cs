@@ -1,36 +1,44 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
 using Phasmophobia_Wiki.Models;
-using Phasmophobia_Wiki.Repositories;
+using Phasmophobia_Wiki.Services;
 
 namespace Phasmophobia_Wiki.DataPopulator;
 
 /// <summary>
 /// This class has been created for the sole purpose of assisting with the editing of the Ghosts.json file.
-/// This will not be used by default when the Web App starts up, and will need to uncommented to be injected within 'Program.cs'
+/// This will not be used by default when the Web App starts up, and will need to uncommented to be used within 'Program.cs'.
 /// </summary>
-public static class DataPopulator
+public class DataPopulator
 {
+    private readonly string _ghostsFilePath;
+    
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
+
+    public DataPopulator(IOptions<Settings> settings)
+    {
+        _ghostsFilePath = settings.Value.GhostsFilePath;
+    }
     
-    public static void PopulateData()
+    public void PopulateData()
     {
         List<Ghost> ghosts = new();
-        string ghostsJson = string.Empty;
+        string ghostsJson;
         
-        if (File.Exists(GhostRepository.FilePath))
+        if (File.Exists(_ghostsFilePath))
         {
-            ghostsJson = File.ReadAllText(GhostRepository.FilePath);
+            ghostsJson = File.ReadAllText(_ghostsFilePath);
             List<Ghost> existingGhosts = JsonSerializer.Deserialize<List<Ghost>>(ghostsJson, JsonSerializerOptions) ?? new List<Ghost>();
             ghosts.AddRange(existingGhosts);
         }
         
         ghosts.AddRange(GetGhosts().ToList());
         ghostsJson = JsonSerializer.Serialize(ghosts);
-        File.WriteAllText(GhostRepository.FilePath, ghostsJson);
+        File.WriteAllText(_ghostsFilePath, ghostsJson);
     }
 
     private static IEnumerable<Ghost> GetGhosts()
@@ -97,7 +105,8 @@ public static class DataPopulator
 
     private static IEnumerable<ActivityEnum> GetRequiredActivity()
     {
-        List<string> activities = Activity.GetActivities();
+        IActivityService activityService = new ActivityService(null);
+        List<string> activities = activityService.GetActivities();
 
         while (true)
         {

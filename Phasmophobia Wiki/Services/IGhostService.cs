@@ -2,8 +2,14 @@
 
 namespace Phasmophobia_Wiki.Services;
 
+/// <summary>
+/// A service layer interface for the GhostService.
+/// </summary>
 public interface IGhostService
 {
-    List<string> ActivityEnumNames { get; }
-    List<Ghost> Ghosts { get; }
+    /// <summary>
+    /// Get all ghosts.
+    /// </summary>
+    /// <returns>A list of ghosts retrieved from the filesystem.</returns>
+    List<Ghost> GetGhosts();
 }
