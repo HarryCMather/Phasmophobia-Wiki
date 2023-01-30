@@ -7,6 +7,7 @@ namespace Phasmophobia_Wiki.Pages;
 
 public class IndexModel : PageModel
 {
+    private readonly IActivityService _activityService;
     private readonly List<Ghost> _ghosts;
 
     private List<ActivityEnum> _checkedActivities = new();
@@ -19,17 +20,24 @@ public class IndexModel : PageModel
     
     public List<string> ActivityEnumNames { get; private set; }
 
-    public IndexModel(IGhostService ghostService)
+    public IndexModel(IGhostService ghostService, IActivityService activityService)
     {
-        _ghosts = ghostService.Ghosts;
-        ActivityEnumNames = ghostService.ActivityEnumNames;
+        _ghosts = ghostService.GetGhosts();
+        _activityService = activityService;
+        ActivityEnumNames = _activityService.GetActivities();
     }
 
     public void OnPost()
     {
         _checkedActivities = CheckedBoxes.Select(value => (ActivityEnum)value).ToList();
-        if (!_checkedActivities.Any()) return;
-        GhostsForActivities = Activity.GetGhostsForActivities(_ghosts, _checkedActivities);
+        
+        // If the user did not select any checkboxes before submitting, do not return any results:
+        if (!_checkedActivities.Any())
+        {
+            return;
+        }
+        
+        GhostsForActivities = _activityService.GetGhostsForActivities(_checkedActivities);
     }
 
     public void OnPostAllGhosts()
