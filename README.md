@@ -3,7 +3,7 @@ A wiki page for the game Phasmophobia.  This uses evidence found in-game, along 
 
 # Running the Application:
 The web application listens on port 8000 over HTTP.  The application can be started by using the following launch profile from within Visual Studio or Rider:
-![image](https://user-images.githubusercontent.com/94319888/215604371-f17a380b-a114-48fe-a30e-dbbc9773fbfb.png)
+
 ![image](https://user-images.githubusercontent.com/94319888/215604371-f17a380b-a114-48fe-a30e-dbbc9773fbfb.png)
 
 
