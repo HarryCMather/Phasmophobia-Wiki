@@ -33,17 +33,17 @@ public class ActivityService : IActivityService
     /// <param name="activity">The 'Activity' enum to retrieve the friendly name for.</param>
     /// <returns>Returns the friendly name for the enum values.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown if an int is casted to 'ActivityEnum' that is outside the expected range.</exception>
-    public string GetActivityName(ActivityEnum activity)
+    public string GetActivityName(Activity activity)
     {
         return activity switch
         {
-            ActivityEnum.Dots => DOTS,
-            ActivityEnum.Emf => EMF,
-            ActivityEnum.Fingerprints => Fingerprints,
-            ActivityEnum.FreezingTemperatures => FreezingTemps,
-            ActivityEnum.GhostOrbs => GhostOrbs,
-            ActivityEnum.GhostWriting => GhostWriting,
-            ActivityEnum.SpiritBox => SpiritBox,
+            Activity.Dots => DOTS,
+            Activity.Emf => EMF,
+            Activity.Fingerprints => Fingerprints,
+            Activity.FreezingTemperatures => FreezingTemps,
+            Activity.GhostOrbs => GhostOrbs,
+            Activity.GhostWriting => GhostWriting,
+            Activity.SpiritBox => SpiritBox,
             _ => throw new ArgumentOutOfRangeException(nameof(activity), activity, "ERROR: An invalid activity was specified.")
         };
     }
@@ -54,7 +54,7 @@ public class ActivityService : IActivityService
     /// <returns>A string list of Activities by it's 'friendly name'.</returns>
     public List<string> GetActivities()
     {
-        return Enum.GetValues<ActivityEnum>()
+        return Enum.GetValues<Activity>()
             .Select(GetActivityName)
             .ToList();
     }
@@ -64,7 +64,7 @@ public class ActivityService : IActivityService
     /// </summary>
     /// <param name="activities">The activities/evidence the user has found so far.</param>
     /// <returns>A list of ghosts that possess the traits of the evidence found.</returns>
-    public List<Ghost> GetGhostsForActivities(List<ActivityEnum> activities)
+    public List<Ghost> GetGhostsForActivities(List<Activity> activities)
     {
         return _ghostService.GetGhosts().Where(ghost => activities.All(activity => ghost.RequiredActivity.Contains(activity))).ToList();
     }

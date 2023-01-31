@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phasmophobia Wiki", "Phasmophobia Wiki\Phasmophobia Wiki.csproj", "{6E38DE3C-7DD9-4DCB-8488-D93694C3349A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phasmophobia Wiki Tests", "Phasmophobia Wiki Tests\Phasmophobia Wiki Tests.csproj", "{88E7BB0D-61C8-4A10-85A6-298526F2CC2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6E38DE3C-7DD9-4DCB-8488-D93694C3349A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E38DE3C-7DD9-4DCB-8488-D93694C3349A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E38DE3C-7DD9-4DCB-8488-D93694C3349A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E7BB0D-61C8-4A10-85A6-298526F2CC2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E7BB0D-61C8-4A10-85A6-298526F2CC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E7BB0D-61C8-4A10-85A6-298526F2CC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E7BB0D-61C8-4A10-85A6-298526F2CC2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

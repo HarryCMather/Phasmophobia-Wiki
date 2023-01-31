@@ -49,7 +49,7 @@ public class ActivityPopulator
         return existingGhosts;
     }
 
-    private static IEnumerable<ActivityEnum> UpdateActivity()
+    private static IEnumerable<Activity> UpdateActivity()
     {
         IActivityService activityService = new ActivityService(null);
         List<string> activities = activityService.GetActivities();
@@ -58,7 +58,7 @@ public class ActivityPopulator
         for (int count = 0; count < 3; count++)
         {
             OutputActivities(activities);
-            yield return (ActivityEnum) (int.Parse(Console.ReadLine()) - 1);
+            yield return (Activity) (int.Parse(Console.ReadLine()) - 1);
         }
     }
 

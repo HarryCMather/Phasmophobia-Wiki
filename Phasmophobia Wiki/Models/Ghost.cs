@@ -7,5 +7,5 @@ public class Ghost
     public List<string> Advantages { get; init; } = new();
     public List<string> Disadvantages { get; init; } = new();
     public List<string> AdditionalDetails { get; init; } = new();
-    public List<ActivityEnum> RequiredActivity { get; set; } = new();
+    public List<Activity> RequiredActivity { get; set; } = new();
 }

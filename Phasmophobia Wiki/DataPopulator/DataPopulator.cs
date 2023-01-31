@@ -103,7 +103,7 @@ public class DataPopulator
         }
     }
 
-    private static IEnumerable<ActivityEnum> GetRequiredActivity()
+    private static IEnumerable<Activity> GetRequiredActivity()
     {
         IActivityService activityService = new ActivityService(null);
         List<string> activities = activityService.GetActivities();
@@ -133,7 +133,7 @@ public class DataPopulator
             if (inputCount >= 0 && inputCount < activities.Count)
             {
                 activities.RemoveAt(inputCount);
-                yield return (ActivityEnum)inputCount;
+                yield return (Activity)inputCount;
             }
             else
             {

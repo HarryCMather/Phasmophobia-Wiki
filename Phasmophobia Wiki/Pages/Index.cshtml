@@ -66,7 +66,7 @@
                         </td>
                         <td>
                             <ul>
-                                @foreach (ActivityEnum activity in ghost.RequiredActivity)
+                                @foreach (Activity activity in ghost.RequiredActivity)
                                 {
                                     // If the user has found the evidence, set the colour to green, if evidence is still to be found set it to red:
                                     string colour = Model.CheckedBoxes.Contains((int)activity) ? "#00ff00" : "#ff0000";
