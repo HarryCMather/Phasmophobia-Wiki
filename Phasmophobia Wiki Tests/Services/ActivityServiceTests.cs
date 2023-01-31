@@ -5,7 +5,7 @@ using Phasmophobia_Wiki_Tests.Test_Data;
 using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Services;
 
-namespace Phasmophobia_Wiki_Tests.Repositories;
+namespace Phasmophobia_Wiki_Tests.Services;
 
 public class ActivityServiceTests
 {

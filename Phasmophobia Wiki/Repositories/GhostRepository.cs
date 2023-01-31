@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using Microsoft.Extensions.Options;
 using Phasmophobia_Wiki.Models;
 
@@ -7,6 +8,7 @@ namespace Phasmophobia_Wiki.Repositories;
 /// <summary>
 /// Repository class to handle reading Ghosts from the filesystem.
 /// </summary>
+[ExcludeFromCodeCoverage(Justification = "Cannot currently unit test the repository layer.")]
 public class GhostRepository : IGhostRepository
 {
     /// <summary>
