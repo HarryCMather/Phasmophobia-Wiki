@@ -13,7 +13,7 @@ public interface IActivityService
     /// <param name="activity">The 'Activity' enum to retrieve the friendly name for.</param>
     /// <returns>Returns the friendly name for the enum values.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown if an int is casted to 'ActivityEnum' that is outside the expected range.</exception>
-    string GetActivityName(ActivityEnum activity);
+    string GetActivityName(Activity activity);
     
     /// <summary>
     /// Returns all possible enum values by their 'friendly name'.
@@ -26,5 +26,5 @@ public interface IActivityService
     /// </summary>
     /// <param name="activities">The activities/evidence the user has found so far.</param>
     /// <returns>A list of ghosts that possess the traits of the evidence found.</returns>
-    List<Ghost> GetGhostsForActivities(List<ActivityEnum> activities);
+    List<Ghost> GetGhostsForActivities(List<Activity> activities);
 }

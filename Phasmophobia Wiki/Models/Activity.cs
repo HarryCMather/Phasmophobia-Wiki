@@ -1,6 +1,6 @@
 ﻿namespace Phasmophobia_Wiki.Models;
 
-public enum ActivityEnum
+public enum Activity
 {
     Dots,
     Emf,

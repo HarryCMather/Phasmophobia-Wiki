@@ -10,7 +10,7 @@ public class IndexModel : PageModel
     private readonly IActivityService _activityService;
     private readonly List<Ghost> _ghosts;
 
-    private List<ActivityEnum> _checkedActivities = new();
+    private List<Activity> _checkedActivities = new();
     
     [BindProperty]
     public List<int> CheckedBoxes { get; set; } = new();
@@ -29,7 +29,7 @@ public class IndexModel : PageModel
 
     public void OnPost()
     {
-        _checkedActivities = CheckedBoxes.Select(value => (ActivityEnum)value).ToList();
+        _checkedActivities = CheckedBoxes.Select(value => (Activity)value).ToList();
         
         // If the user did not select any checkboxes before submitting, do not return any results:
         if (!_checkedActivities.Any())
