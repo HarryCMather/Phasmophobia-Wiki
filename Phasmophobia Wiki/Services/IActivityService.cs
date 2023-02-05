@@ -26,5 +26,5 @@ public interface IActivityService
     /// </summary>
     /// <param name="activities">The activities/evidence the user has found so far.</param>
     /// <returns>A list of ghosts that possess the traits of the evidence found.</returns>
-    List<Ghost> GetGhostsForActivities(List<Activity> activities);
+    IEnumerable<Ghost> GetGhostsForActivities(List<Activity> activities);
 }

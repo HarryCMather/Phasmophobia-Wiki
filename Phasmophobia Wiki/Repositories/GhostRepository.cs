@@ -26,16 +26,16 @@ public class GhostRepository : IGhostRepository
     /// Reads the Ghosts from the 'Ghosts.json' file and returns a deserialized List of type 'Ghost'. 
     /// </summary>
     /// <returns>A list of Ghosts.</returns>
-    public IEnumerable<Ghost> GetGhosts()
+    public HashSet<Ghost> GetGhosts()
     {
-        if (!File.Exists(_filePath))
+        HashSet<Ghost>? ghosts = null;
+        
+        if (File.Exists(_filePath))
         {
-            return Enumerable.Empty<Ghost>();
+            string json = File.ReadAllText(_filePath);
+            ghosts = JsonSerializer.Deserialize<HashSet<Ghost>>(json);    
         }
         
-        string json = File.ReadAllText(_filePath);
-        List<Ghost>? ghosts = JsonSerializer.Deserialize<List<Ghost>>(json);
-
-        return ghosts ?? Enumerable.Empty<Ghost>();
+        return ghosts ?? new HashSet<Ghost>();
     }
 }

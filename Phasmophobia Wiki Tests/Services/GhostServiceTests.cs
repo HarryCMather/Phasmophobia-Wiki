@@ -20,7 +20,7 @@ public class GhostServiceTests
         IGhostService ghostService = new GhostService(mockGhostRepository);
         
         // Act:
-        List<Ghost> ghosts = ghostService.GetGhosts();
+        HashSet<Ghost> ghosts = ghostService.GetGhosts();
 
         // Assert:
         ghosts.Should().HaveCount(ExampleGhosts.GetExampleGhosts().Count);
