@@ -11,5 +11,5 @@ public interface IGhostService
     /// Get all ghosts.
     /// </summary>
     /// <returns>A list of ghosts retrieved from the filesystem.</returns>
-    List<Ghost> GetGhosts();
+    HashSet<Ghost> GetGhosts();
 }

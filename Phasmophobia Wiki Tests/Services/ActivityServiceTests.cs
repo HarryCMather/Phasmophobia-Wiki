@@ -80,7 +80,7 @@ public class ActivityServiceTests
         IGhostService mockGhostService = Substitute.For<IGhostService>();
         IActivityService activityService = new ActivityService(mockGhostService);
 
-        List<Ghost> exampleGhosts = ExampleGhosts.GetExampleGhosts().Take(2).ToList();
+        HashSet<Ghost> exampleGhosts = ExampleGhosts.GetExampleGhosts().Take(2).ToHashSet();
 
         mockGhostService.GetGhosts().Returns(exampleGhosts);
 
@@ -91,7 +91,7 @@ public class ActivityServiceTests
         };
 
         // Act:
-        List<Ghost> results = activityService.GetGhostsForActivities(activities);
+        List<Ghost> results = activityService.GetGhostsForActivities(activities).ToList();
 
         // Assert:
         results.Should().HaveCount(1);
@@ -108,7 +108,7 @@ public class ActivityServiceTests
         IGhostService mockGhostService = Substitute.For<IGhostService>();
         IActivityService activityService = new ActivityService(mockGhostService);
 
-        List<Ghost> exampleGhosts = ExampleGhosts.GetExampleGhosts();
+        HashSet<Ghost> exampleGhosts = ExampleGhosts.GetExampleGhosts();
 
         mockGhostService.GetGhosts().Returns(exampleGhosts);
 
@@ -118,7 +118,7 @@ public class ActivityServiceTests
         };
 
         // Act:
-        List<Ghost> results = activityService.GetGhostsForActivities(activities);
+        IEnumerable<Ghost> results = activityService.GetGhostsForActivities(activities);
         
         // Assert:
         results.Should().BeEmpty();

@@ -64,8 +64,8 @@ public class ActivityService : IActivityService
     /// </summary>
     /// <param name="activities">The activities/evidence the user has found so far.</param>
     /// <returns>A list of ghosts that possess the traits of the evidence found.</returns>
-    public List<Ghost> GetGhostsForActivities(List<Activity> activities)
+    public IEnumerable<Ghost> GetGhostsForActivities(List<Activity> activities)
     {
-        return _ghostService.GetGhosts().Where(ghost => activities.All(activity => ghost.RequiredActivity.Contains(activity))).ToList();
+        return _ghostService.GetGhosts().Where(ghost => activities.All(activity => ghost.RequiredActivity.Contains(activity)));
     }
 }

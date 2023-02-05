@@ -4,9 +4,9 @@ namespace Phasmophobia_Wiki_Tests.Test_Data;
 
 public static class ExampleGhosts
 {
-    public static List<Ghost> GetExampleGhosts()
+    public static HashSet<Ghost> GetExampleGhosts()
     {
-        return new List<Ghost>
+        return new HashSet<Ghost>
         {
             new()
             {

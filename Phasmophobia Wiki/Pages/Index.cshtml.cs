@@ -8,7 +8,7 @@ namespace Phasmophobia_Wiki.Pages;
 public class IndexModel : PageModel
 {
     private readonly IActivityService _activityService;
-    private readonly List<Ghost> _ghosts;
+    private readonly HashSet<Ghost> _ghosts;
 
     private List<Activity> _checkedActivities = new();
     
@@ -16,7 +16,7 @@ public class IndexModel : PageModel
     public List<int> CheckedBoxes { get; set; } = new();
 
     [BindProperty]
-    public List<Ghost> GhostsForActivities { get; private set; } = new();
+    public IEnumerable<Ghost> GhostsForActivities { get; private set; } = Enumerable.Empty<Ghost>();
     
     public List<string> ActivityEnumNames { get; private set; }
 
