@@ -1,4 +1,6 @@
-﻿using Phasmophobia_Wiki.Models;
+﻿using System.ComponentModel;
+using System.Reflection;
+using Phasmophobia_Wiki.Models;
 
 namespace Phasmophobia_Wiki.Services;
 
@@ -8,15 +10,8 @@ namespace Phasmophobia_Wiki.Services;
 public class ActivityService : IActivityService
 {
     private readonly IGhostService _ghostService;
-
-    // The 'friendly names' for the 'Activity' enum values:
-    private const string DOTS = "D.O.T.S Projector";
-    private const string EMF = "EMF Level 5";
-    private const string Fingerprints = "Fingerprints";
-    private const string FreezingTemps = "Freezing Temperatures";
-    private const string GhostOrbs = "Ghost Orbs";
-    private const string GhostWriting = "Ghost Writing";
-    private const string SpiritBox = "Spirit Box";
+    private readonly Dictionary<Activity, string> _activityFriendlyNames;
+    private readonly Activity[] _activityValues;
     
     /// <summary>
     /// Ctor for the 'ActivityService' class.
@@ -25,37 +20,62 @@ public class ActivityService : IActivityService
     public ActivityService(IGhostService ghostService)
     {
         _ghostService = ghostService;
+        _activityValues = Enum.GetValues<Activity>();
+        _activityFriendlyNames = GetActivityDescriptions();
     }
     
-    /// <summary>
-    /// Retrieves the 'friendly name' for a given 'Activity' enum value. 
-    /// </summary>
-    /// <param name="activity">The 'Activity' enum to retrieve the friendly name for.</param>
-    /// <returns>Returns the friendly name for the enum values.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown if an int is casted to 'ActivityEnum' that is outside the expected range.</exception>
-    public string GetActivityName(Activity activity)
+    private Dictionary<Activity, string> GetActivityDescriptions()
     {
-        return activity switch
+        Dictionary<Activity, string> activityDescriptors = new();
+
+        Type activityType = typeof(Activity);
+        
+        foreach (Activity activity in _activityValues)
         {
-            Activity.Dots => DOTS,
-            Activity.Emf => EMF,
-            Activity.Fingerprints => Fingerprints,
-            Activity.FreezingTemperatures => FreezingTemps,
-            Activity.GhostOrbs => GhostOrbs,
-            Activity.GhostWriting => GhostWriting,
-            Activity.SpiritBox => SpiritBox,
-            _ => throw new ArgumentOutOfRangeException(nameof(activity), activity, "ERROR: An invalid activity was specified.")
-        };
+            FieldInfo fieldInfo = activityType.GetField(activity.ToString())!;
+            
+            string activityDescription = ((DescriptionAttribute[]) fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute)))[0].Description;
+            
+            activityDescriptors.Add(activity, activityDescription);
+        }
+
+        return activityDescriptors;
     }
 
     /// <summary>
-    /// Returns all possible enum values by their 'friendly name'.
+    /// Retrieves the descriptor for a given Activity. 
     /// </summary>
-    /// <returns>A string list of Activities by it's 'friendly name'.</returns>
-    public List<string> GetActivities()
+    /// <param name="activity">The Activity enum to retrieve the descriptor for.</param>
+    /// <returns>Returns the activity's descriptor.</returns>
+    /// <exception cref="KeyNotFoundException">Thrown if the requested key does not exist. This should, in reality, never be thrown.</exception>
+    public string GetActivityDescriptor(Activity activity)
     {
-        return Enum.GetValues<Activity>()
-            .Select(GetActivityName)
+        return _activityFriendlyNames[activity];
+    }
+
+    /// <summary>
+    /// Returns all possible enum values by its descriptor.
+    /// </summary>
+    /// <returns>A string list of Activities by its descriptor.</returns>
+    public List<string> GetAllActivities()
+    {
+        return _activityValues
+            .Select(GetActivityDescriptor)
+            .ToList();
+    }
+
+    /// <summary>
+    /// Get all activities from the activities flag enum passed in.
+    /// This is required for listing all activities for a given ghost from the flag combination.
+    /// </summary>
+    /// <param name="activityFlags">The activity combination for a given ghost.</param>
+    /// <returns>A list of activities that a ghost possesses.</returns>
+    public List<Activity> GetActivitiesByFlags(Activity activityFlags)
+    {
+        return _activityValues
+            .Cast<Enum>()
+            .Where(activityFlags.HasFlag)
+            .Cast<Activity>()
             .ToList();
     }
 
@@ -64,8 +84,9 @@ public class ActivityService : IActivityService
     /// </summary>
     /// <param name="activities">The activities/evidence the user has found so far.</param>
     /// <returns>A list of ghosts that possess the traits of the evidence found.</returns>
-    public IEnumerable<Ghost> GetGhostsForActivities(List<Activity> activities)
+    public IEnumerable<Ghost> GetGhostsForActivities(Activity activities)
     {
-        return _ghostService.GetGhosts().Where(ghost => activities.All(activity => ghost.RequiredActivity.Contains(activity)));
+        return _ghostService.GetGhosts()
+            .Where(ghost => ghost.RequiredActivity.HasFlag(activities));
     }
 }

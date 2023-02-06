@@ -66,11 +66,11 @@
                         </td>
                         <td>
                             <ul>
-                                @foreach (Activity activity in ghost.RequiredActivity)
+                                @foreach (Activity activity in ActivityService.GetActivitiesByFlags(ghost.RequiredActivity))
                                 {
                                     // If the user has found the evidence, set the colour to green, if evidence is still to be found set it to red:
-                                    string colour = Model.CheckedBoxes.Contains((int)activity) ? "#00ff00" : "#ff0000";
-                                    <li style="color: @colour">@ActivityService.GetActivityName(activity)</li>
+                                    string colour = Model.CheckedActivities.HasFlag(activity) ? "#00ff00" : "#ff0000";
+                                    <li style="color: @colour">@ActivityService.GetActivityDescriptor(activity)</li>
                                 }
                             </ul>
                         </td>
