@@ -21,7 +21,7 @@ builder.Services.AddSingleton<IGhostRepository, GhostRepository>();
 
 builder.Services.AddSingleton<IGhostService, GhostService>();
 
-builder.Services.AddScoped<IActivityService, ActivityService>();
+builder.Services.AddSingleton<IActivityService, ActivityService>();
 
 builder.Services.AddRazorPages();
 
