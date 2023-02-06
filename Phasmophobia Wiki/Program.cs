@@ -2,26 +2,11 @@ using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Repositories;
 using Phasmophobia_Wiki.Services;
 
-// Leaving this commented out, so it can be easily added back in the future:
-// IOptions<Settings> settings = Options.Create(new Settings
-// {
-//     GhostsFilePath = "./ghosts.json"
-// });
-// DataPopulator dataPopulator = new(settings);
-// ActivityPopulator activityPopulator = new(settings);
-// dataPopulator.PopulateData();
-// activityPopulator.PopulateData();
-// return;
-
 var builder = WebApplication.CreateBuilder(args);
 
-<<<<<<< Updated upstream
-// Run the application on port 8000, regardless of what port is set in launchsettings.json
-=======
 builder.Services.AddResponseCompression();
 
 // Run the application on port 8000, regardless of what port is set in launchSettings.json
->>>>>>> Stashed changes
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8000);
