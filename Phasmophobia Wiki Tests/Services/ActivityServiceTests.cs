@@ -23,7 +23,7 @@ public class ActivityServiceTests
         IActivityService activityService = new ActivityService(mockGhostService);
 
         // Act:
-        string result = activityService.GetActivityName(activity);
+        string result = activityService.GetActivityDescriptor(activity);
 
         // Assert
         result.Should().Be(expectedActivityFriendlyName);
@@ -36,10 +36,10 @@ public class ActivityServiceTests
         IGhostService mockGhostService = Substitute.For<IGhostService>();
         IActivityService activityService = new ActivityService(mockGhostService);
 
-        const Activity invalidActivity = (Activity)25;
+        const Activity invalidActivity = (Activity) 25;
 
         // Act & Assert:
-        Assert.Throws<ArgumentOutOfRangeException>(() => activityService.GetActivityName(invalidActivity));
+        Assert.Throws<KeyNotFoundException>(() => activityService.GetActivityDescriptor(invalidActivity));
     }
 
     [Test]
@@ -61,7 +61,7 @@ public class ActivityServiceTests
         };
 
         // Act:
-        List<string> result = activityService.GetActivities();
+        List<string> result = activityService.GetAllActivities();
 
         // Assert:
         result[0].Should().Be(expectedOutput[0]);
@@ -84,11 +84,7 @@ public class ActivityServiceTests
 
         mockGhostService.GetGhosts().Returns(exampleGhosts);
 
-        List<Activity> activities = new()
-        {
-            Activity.Emf,
-            Activity.Dots
-        };
+        const Activity activities = Activity.Emf | Activity.Dots;
 
         // Act:
         List<Ghost> results = activityService.GetGhostsForActivities(activities).ToList();
@@ -97,8 +93,8 @@ public class ActivityServiceTests
         results.Should().HaveCount(1);
         
         results[0].Name.Should().Be("Test Ghost 1");
-        results[0].RequiredActivity.Should().Contain(Activity.Emf);
-        results[0].RequiredActivity.Should().Contain(Activity.Dots);
+        results[0].RequiredActivity.Should().HaveFlag(Activity.Emf);
+        results[0].RequiredActivity.Should().HaveFlag(Activity.Dots);
     }
     
     [Test]
@@ -112,15 +108,36 @@ public class ActivityServiceTests
 
         mockGhostService.GetGhosts().Returns(exampleGhosts);
 
-        List<Activity> activities = new()
-        {
-            Activity.GhostOrbs
-        };
+        const Activity activities = Activity.GhostOrbs;
 
         // Act:
         IEnumerable<Ghost> results = activityService.GetGhostsForActivities(activities);
         
         // Assert:
         results.Should().BeEmpty();
+    }
+
+    [Test]
+    public void GetActivitiesByFlags_GivenGhostContainsAllFlagCombinations_ShouldReturnActivitiesList()
+    {
+        // Arrange:
+        IGhostService mockGhostService = Substitute.For<IGhostService>();
+        IActivityService activityService = new ActivityService(mockGhostService);
+
+        Ghost ghost = ExampleGhosts.GetExampleGhosts().First();
+
+        List<Activity> expectedActivities = new()
+        {
+            Activity.Dots,
+            Activity.Emf
+        };
+        
+        // Act:
+        List<Activity> actualActivities = activityService.GetActivitiesByFlags(ghost.RequiredActivity);
+        
+        // Assert:
+        actualActivities.Should().HaveCount(2);
+        actualActivities[0].Should().Be(expectedActivities[0]);
+        actualActivities[1].Should().Be(expectedActivities[1]);
     }
 }
