@@ -15,7 +15,13 @@ using Phasmophobia_Wiki.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+<<<<<<< Updated upstream
 // Run the application on port 8000, regardless of what port is set in launchsettings.json
+=======
+builder.Services.AddResponseCompression();
+
+// Run the application on port 8000, regardless of what port is set in launchSettings.json
+>>>>>>> Stashed changes
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8000);
@@ -35,15 +41,14 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+app.UseResponseCompression();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
