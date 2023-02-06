@@ -10,7 +10,8 @@ public class IndexModel : PageModel
     private readonly IActivityService _activityService;
     private readonly HashSet<Ghost> _ghosts;
 
-    private List<Activity> _checkedActivities = new();
+    [BindProperty]
+    public Activity CheckedActivities { get; private set; }
     
     [BindProperty]
     public List<int> CheckedBoxes { get; set; } = new();
@@ -24,20 +25,20 @@ public class IndexModel : PageModel
     {
         _ghosts = ghostService.GetGhosts();
         _activityService = activityService;
-        ActivityEnumNames = _activityService.GetActivities();
+        ActivityEnumNames = _activityService.GetAllActivities();
     }
 
     public void OnPost()
     {
-        _checkedActivities = CheckedBoxes.Select(value => (Activity)value).ToList();
-        
         // If the user did not select any checkboxes before submitting, do not return any results:
-        if (!_checkedActivities.Any())
+        if (!CheckedBoxes.Any())
         {
             return;
         }
+
+        CheckedActivities = (Activity) CheckedBoxes.Sum(checkboxValue => Math.Pow(2, checkboxValue));
         
-        GhostsForActivities = _activityService.GetGhostsForActivities(_checkedActivities);
+        GhostsForActivities = _activityService.GetGhostsForActivities(CheckedActivities);
     }
 
     public void OnPostAllGhosts()

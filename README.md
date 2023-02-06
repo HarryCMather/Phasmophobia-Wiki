@@ -21,5 +21,3 @@ This will pull the source files from GitHub, build them and launch the applicati
 -Using IMemoryCache at the service layer.
 
 -Addition of Unit tests. (work started)
-
--Investigate using Flag Enums, rather than having a list of Enums.
