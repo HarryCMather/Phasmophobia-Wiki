@@ -11,4 +11,8 @@
       <PackageReference Include="NSubstitute" Version="4.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+    </ItemGroup>
+
 </Project>
