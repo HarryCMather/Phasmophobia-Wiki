@@ -1,3 +1,4 @@
+using Microsoft.Net.Http.Headers;
 using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Repositories;
 using Phasmophobia_Wiki.Services;
@@ -35,7 +36,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseStaticFiles();
+app.UseHttpsRedirection();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = context =>
+    {
+        const int durationInSeconds = 604800;
+        context.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
+    }
+});
+
+app.UseAuthorization();
 
 app.UseRouting();
 
