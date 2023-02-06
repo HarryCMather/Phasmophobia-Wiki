@@ -36,6 +36,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseHttpsRedirection();
+
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = context =>
@@ -44,6 +46,8 @@ app.UseStaticFiles(new StaticFileOptions
         context.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
     }
 });
+
+app.UseAuthorization();
 
 app.UseRouting();
 
