@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="NSubstitute" Version="4.4.0" />
+      <PackageReference Include="WebMarkupMin.AspNetCore6" Version="2.13.7" />
     </ItemGroup>
 
     <ItemGroup>
