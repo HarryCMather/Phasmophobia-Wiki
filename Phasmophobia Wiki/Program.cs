@@ -2,10 +2,22 @@ using Microsoft.Net.Http.Headers;
 using Phasmophobia_Wiki.Models;
 using Phasmophobia_Wiki.Repositories;
 using Phasmophobia_Wiki.Services;
+using WebMarkupMin.AspNetCore6;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddResponseCompression();
+builder.Services.AddWebMarkupMin(options => 
+    {
+        options.AllowMinificationInDevelopmentEnvironment = true;
+        options.AllowCompressionInDevelopmentEnvironment = true;
+    }).AddHtmlMinification(options =>
+    {
+        options.MinificationSettings.RemoveRedundantAttributes = true;
+        options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
+        options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
+    }).AddHttpCompression();
+
+// builder.Services.AddResponseCompression();
 
 // Run the application on port 8000, regardless of what port is set in launchSettings.json
 builder.WebHost.ConfigureKestrel(options =>
@@ -27,7 +39,8 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-app.UseResponseCompression();
+// app.UseResponseCompression();
+app.UseWebMarkupMin();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
