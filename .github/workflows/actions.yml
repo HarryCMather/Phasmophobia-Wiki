@@ -21,6 +21,9 @@ jobs:
 
     - name: Publish Project
       run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" --configuration Release --output ./Output
+    
+    - name: Remove Additional CSS
+      run: rm -r ./Output/wwwroot/lib/bootstrap/dist/css
 
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
