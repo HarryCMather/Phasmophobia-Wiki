@@ -23,8 +23,8 @@ jobs:
       run: dotnet publish "./Phasmophobia Wiki/Phasmophobia Wiki.csproj" --configuration Release --output ./Output
     
     # All required CSS/JS have already been added, this is removed as bootstrap was massively inflating the artifact size
-    - name: Remove Additional CSS/JS
-      run: rm -r ./Output/wwwroot
+    # - name: Remove Additional CSS/JS
+    #   run: rm -r ./Output/wwwroot
 
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
