@@ -7,8 +7,4 @@
         <RootNamespace>Phasmophobia_Wiki</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\*" />
-    </ItemGroup>
-
 </Project>
