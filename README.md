@@ -18,6 +18,5 @@ The Web Application has also been containerized.  If you download the Dockerfile
 This will pull the source files from GitHub, build them and launch the application, meaning it does not require any volume mappings.  This again, will run on port 8000.
 
 # Planned development items:
--Using IMemoryCache at the service layer.
 
 -Addition of Unit tests. (work started)
