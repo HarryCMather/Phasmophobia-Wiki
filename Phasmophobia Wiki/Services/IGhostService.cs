@@ -8,8 +8,7 @@ namespace Phasmophobia_Wiki.Services;
 public interface IGhostService
 {
     /// <summary>
-    /// Get all ghosts.
+    /// A list of ghosts retrieved from the filesystem through the repository layer.
     /// </summary>
-    /// <returns>A list of ghosts retrieved from the filesystem.</returns>
-    HashSet<Ghost> GetGhosts();
+    HashSet<Ghost> Ghosts { get; }
 }

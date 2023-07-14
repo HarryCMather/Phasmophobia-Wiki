@@ -23,9 +23,9 @@ public class IndexModel : PageModel
 
     public IndexModel(IGhostService ghostService, IActivityService activityService)
     {
-        _ghosts = ghostService.GetGhosts();
+        _ghosts = ghostService.Ghosts;
         _activityService = activityService;
-        ActivityEnumNames = _activityService.GetAllActivities();
+        ActivityEnumNames = _activityService.ActivityDescriptors;
     }
 
     public void OnPost()
@@ -36,6 +36,7 @@ public class IndexModel : PageModel
             return;
         }
 
+        // As flag enums are used, we can go through each checked item and perform (2 pow count) to get the flag enum combination:
         CheckedActivities = (Activity) CheckedBoxes.Sum(checkboxValue => Math.Pow(2, checkboxValue));
         
         GhostsForActivities = _activityService.GetGhostsForActivities(CheckedActivities);

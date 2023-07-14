@@ -8,7 +8,10 @@ namespace Phasmophobia_Wiki.Services;
 /// </summary>
 public class GhostService : IGhostService
 {
-    private HashSet<Ghost> Ghosts { get; }
+    /// <summary>
+    /// A list of ghosts retrieved from the filesystem through the repository layer.
+    /// </summary>
+    public HashSet<Ghost> Ghosts { get; }
 
     /// <summary>
     /// Ctor for the GhostService.
@@ -17,14 +20,5 @@ public class GhostService : IGhostService
     public GhostService(IGhostRepository ghostRepository)
     {
         Ghosts = ghostRepository.GetGhosts();
-    }
-
-    /// <summary>
-    /// Get all ghosts.
-    /// </summary>
-    /// <returns>A list of ghosts retrieved from the filesystem.</returns>
-    public HashSet<Ghost> GetGhosts()
-    {
-        return Ghosts;
     }
 }

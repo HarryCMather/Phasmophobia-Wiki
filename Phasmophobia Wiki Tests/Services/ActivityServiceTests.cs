@@ -43,7 +43,7 @@ public class ActivityServiceTests
     }
 
     [Test]
-    public void GetActivities_ShouldReturnAllExpectedActivitiesByFriendlyName()
+    public void ActivityDescriptors_ShouldReturnAllExpectedActivitiesByFriendlyName()
     {
         // Arrange:
         IGhostService mockGhostService = Substitute.For<IGhostService>();
@@ -61,7 +61,7 @@ public class ActivityServiceTests
         };
 
         // Act:
-        List<string> result = activityService.GetAllActivities();
+        List<string> result = activityService.ActivityDescriptors;
 
         // Assert:
         result[0].Should().Be(expectedOutput[0]);
@@ -82,7 +82,7 @@ public class ActivityServiceTests
 
         HashSet<Ghost> exampleGhosts = ExampleGhosts.GetExampleGhosts().Take(2).ToHashSet();
 
-        mockGhostService.GetGhosts().Returns(exampleGhosts);
+        mockGhostService.Ghosts.Returns(exampleGhosts);
 
         const Activity activities = Activity.Emf | Activity.Dots;
 
@@ -106,7 +106,7 @@ public class ActivityServiceTests
 
         HashSet<Ghost> exampleGhosts = ExampleGhosts.GetExampleGhosts();
 
-        mockGhostService.GetGhosts().Returns(exampleGhosts);
+        mockGhostService.Ghosts.Returns(exampleGhosts);
 
         const Activity activities = Activity.GhostOrbs;
 
@@ -133,8 +133,8 @@ public class ActivityServiceTests
         };
         
         // Act:
-        List<Activity> actualActivities = activityService.GetActivitiesByFlags(ghost.RequiredActivity);
-        
+        List<Activity> actualActivities = activityService.GetActivitiesByFlags(ghost.RequiredActivity).ToList();
+
         // Assert:
         actualActivities.Should().HaveCount(2);
         actualActivities[0].Should().Be(expectedActivities[0]);

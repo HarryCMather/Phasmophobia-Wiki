@@ -10,8 +10,14 @@ namespace Phasmophobia_Wiki.Services;
 public class ActivityService : IActivityService
 {
     private readonly IGhostService _ghostService;
-    private readonly Dictionary<Activity, string> _activityFriendlyNames;
+    private readonly Dictionary<Activity, string> _activityDescriptorMapping;
     private readonly Activity[] _activityValues;
+    
+    /// <summary>
+    /// Returns all possible enum values by its descriptor.
+    /// </summary>
+    /// <returns>A string list of Activities by its descriptor.</returns>
+    public List<string> ActivityDescriptors { get; } = new();
     
     /// <summary>
     /// Ctor for the 'ActivityService' class.
@@ -21,25 +27,27 @@ public class ActivityService : IActivityService
     {
         _ghostService = ghostService;
         _activityValues = Enum.GetValues<Activity>();
-        _activityFriendlyNames = GetActivityDescriptions();
+        _activityDescriptorMapping = GetActivityDescriptions();
     }
     
     private Dictionary<Activity, string> GetActivityDescriptions()
     {
-        Dictionary<Activity, string> activityDescriptors = new();
+        Dictionary<Activity, string> activityDescriptorMappings = new();
 
         Type activityType = typeof(Activity);
         
+        // Whilst the use of reflection is slow, this class is a singleton and this logic is being performed once upon instantiation, so this is not a performance penalty. 
         foreach (Activity activity in _activityValues)
         {
             FieldInfo fieldInfo = activityType.GetField(activity.ToString())!;
             
             string activityDescription = ((DescriptionAttribute[]) fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute)))[0].Description;
             
-            activityDescriptors.Add(activity, activityDescription);
+            activityDescriptorMappings.Add(activity, activityDescription);
+            ActivityDescriptors.Add(activityDescription);
         }
 
-        return activityDescriptors;
+        return activityDescriptorMappings;
     }
 
     /// <summary>
@@ -50,18 +58,7 @@ public class ActivityService : IActivityService
     /// <exception cref="KeyNotFoundException">Thrown if the requested key does not exist. This should, in reality, never be thrown.</exception>
     public string GetActivityDescriptor(Activity activity)
     {
-        return _activityFriendlyNames[activity];
-    }
-
-    /// <summary>
-    /// Returns all possible enum values by its descriptor.
-    /// </summary>
-    /// <returns>A string list of Activities by its descriptor.</returns>
-    public List<string> GetAllActivities()
-    {
-        return _activityValues
-            .Select(GetActivityDescriptor)
-            .ToList();
+        return _activityDescriptorMapping[activity];
     }
 
     /// <summary>
@@ -70,13 +67,12 @@ public class ActivityService : IActivityService
     /// </summary>
     /// <param name="activityFlags">The activity combination for a given ghost.</param>
     /// <returns>A list of activities that a ghost possesses.</returns>
-    public List<Activity> GetActivitiesByFlags(Activity activityFlags)
+    public IEnumerable<Activity> GetActivitiesByFlags(Activity activityFlags)
     {
         return _activityValues
             .Cast<Enum>()
             .Where(activityFlags.HasFlag)
-            .Cast<Activity>()
-            .ToList();
+            .Cast<Activity>();
     }
 
     /// <summary>
@@ -86,7 +82,7 @@ public class ActivityService : IActivityService
     /// <returns>A list of ghosts that possess the traits of the evidence found.</returns>
     public IEnumerable<Ghost> GetGhostsForActivities(Activity activities)
     {
-        return _ghostService.GetGhosts()
+        return _ghostService.Ghosts
             .Where(ghost => ghost.RequiredActivity.HasFlag(activities));
     }
 }
