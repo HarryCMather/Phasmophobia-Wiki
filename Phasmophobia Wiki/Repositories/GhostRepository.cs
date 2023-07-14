@@ -13,7 +13,6 @@ public class GhostRepository : IGhostRepository
 {
     /// <summary>
     /// The file path of the JSON file to read.
-    /// This is public, as it's also used in the DataPopulator.cs and ActivityPopulator.cs static classes.
     /// </summary>
     private readonly string _filePath;
 

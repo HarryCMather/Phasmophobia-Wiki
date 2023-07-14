@@ -8,6 +8,12 @@ namespace Phasmophobia_Wiki.Services;
 public interface IActivityService
 {
     /// <summary>
+    /// Returns all possible enum values by its descriptor.
+    /// </summary>
+    /// <returns>A string list of Activities by its descriptor.</returns>
+    public List<string> ActivityDescriptors { get; }
+    
+    /// <summary>
     /// Retrieves the descriptor for a given Activity. 
     /// </summary>
     /// <param name="activity">The Activity enum to retrieve the descriptor for.</param>
@@ -16,18 +22,12 @@ public interface IActivityService
     string GetActivityDescriptor(Activity activity);
     
     /// <summary>
-    /// Returns all possible enum values by its descriptor.
-    /// </summary>
-    /// <returns>A string list of Activities by its descriptor.</returns>
-    List<string> GetAllActivities();
-
-    /// <summary>
     /// Get all activities from the activities flag enum passed in.
     /// This is required for listing all activities for a given ghost from the flag combination.
     /// </summary>
     /// <param name="activityFlags">The activity combination for a given ghost.</param>
     /// <returns>A list of activities that a ghost possesses.</returns>
-    List<Activity> GetActivitiesByFlags(Activity activityFlags);
+    IEnumerable<Activity> GetActivitiesByFlags(Activity activityFlags);
     
     /// <summary>
     /// Filter the list of ghosts, returning only the ghosts that have the activities the user has passed in.

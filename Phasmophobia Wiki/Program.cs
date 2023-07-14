@@ -42,7 +42,7 @@ app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = context =>
     {
-        const int durationInSeconds = 604800;
+        const int durationInSeconds = 604800; // 7 days in seconds
         context.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
     }
 });
