@@ -16,6 +16,10 @@ public class GhostRepository : IGhostRepository
     /// </summary>
     private readonly string _filePath;
 
+    /// <summary>
+    /// Ctor.
+    /// </summary>
+    /// <param name="settings">Settings object containing the 'GhostsFilePath'.</param>
     public GhostRepository(IOptions<Settings> settings)
     {
         _filePath = settings.Value.GhostsFilePath;
@@ -27,14 +31,8 @@ public class GhostRepository : IGhostRepository
     /// <returns>A list of Ghosts.</returns>
     public HashSet<Ghost> GetGhosts()
     {
-        HashSet<Ghost>? ghosts = null;
-        
-        if (File.Exists(_filePath))
-        {
-            string json = File.ReadAllText(_filePath);
-            ghosts = JsonSerializer.Deserialize<HashSet<Ghost>>(json);    
-        }
-        
-        return ghosts ?? new HashSet<Ghost>();
+        string json = File.ReadAllText(_filePath);
+        HashSet<Ghost> ghosts = JsonSerializer.Deserialize<HashSet<Ghost>>(json)!;
+        return ghosts;
     }
 }
